@@ -1,20 +1,30 @@
 #include<stdio.h>
-void addValue(int numbers[],int index){
-    int size = 7;
-    for (int i = index; i < size; i++)
-    {
-        numbers[index] = numbers[index+1];
-    }
-    size--;
-    for (int i = 0; i < size; i++)
-    {
-        printf("numbers[%d] = %d\n",i, numbers[i]);
-    }    
-}
+#include<stdlib.h>
+int removeValue(int *arr,int *size,int index);
 int main(){
-    int numbers[7] = {1,2,3,4,5,6,7};
-    int index;
-    printf("Nhap vi tri muon xoa : ");
+    int arr[7] = {1,2,3,4,5,6,7};
+    int index, size = sizeof(arr)/sizeof(int);
+    printf("Nhap vi tri ban muon xoa : ");
     scanf("%d",&index);
-    addValue(numbers,index);
+    removeValue(arr,&size,index);
+}
+
+
+int removeValue(int *arr,int *size,int index){
+    if (index < 0 || index >= *size)
+    {
+        printf("Khong hop le!");
+        return 0;
+    }
+    for (int i = index; i < *size; i++)
+    {
+        *(arr+i) = *(arr+i+1);
+    }
+    (*size)--;
+    
+    for (int i = 0; i < *size; i++)
+    {
+        printf("%d\t",*(arr+i));
+    }
+    return 0;
 }
